@@ -3,10 +3,11 @@ import { TaskSchema } from '../models/taskModel';
 
 const Task = mongoose.model('Task', TaskSchema);
 
-export const addNewTask = (req, res) => {
-    let newTassk = new Task(req.body);
 
-    newTassk.save((err, task) => {
+export const addNewTask = (req, res) => {
+    let newTask = new Task(req.body);
+
+    newTask.save((err, task) => {
         if(err){
             res.send(err);
         }
@@ -15,12 +16,21 @@ export const addNewTask = (req, res) => {
 };
 
 export const getTasks = ( req, res ) => {
-    Task.find({}, (err, task) => {
+
+    
+    Task.find({user:req.body.user}, (err, task) => {
         if (err){
             res.send(err);
         }
         res.json(task);
     });
+
+    // Task.find({}, (err, task) => {
+    //     if (err){
+    //         res.send(err);
+    //     }
+    //     res.json(task);
+    // });
 };
 
 export const getSpecificTask = ( req, res ) => {

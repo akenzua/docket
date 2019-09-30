@@ -18,7 +18,13 @@ app.get('/', (req, res) =>
 //     console.log(`your server is running on port ${PORT}`)
 // );
 
-mongoose.connect(`mongodb+srv://akenzua:${process.env.MONGO_PASSWORD}@cluster0-3rpvi.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`)
+
+mongoose.connect(`mongodb+srv://akenzua:${process.env.MONGO_PASSWORD}@cluster0-3rpvi.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`,
+{
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+})
 .then(() => {
     console.log(`your server is running on port ${PORT}`)
     app.listen(4000);
